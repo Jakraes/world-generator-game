@@ -64,6 +64,25 @@ def filter_world(world):
                     world[line][col] = "_ "
             except:
                 pass
+
+    world_copy = create_world(len(world)+2)
+
+    for line in range(len(world)):
+        for col in range(len(world[0])):
+            world_copy[line+1][col+1] = world[line][col]
+
+    for line in range(len(world)):
+        for col in range(len(world[0])):
+            if line == 0 or line == len(world)-1 or col == 0 or col == len(world[0])-1:
+                if world[line][col] == "_ ":
+                    world[line][col] = "# "
+    for line in range(len(world)):
+        for col in range(len(world[0])):
+            area = [world_copy[line][col], world_copy[line][col+1], world_copy[line][col + 2],
+                    world_copy[line+1][col], world_copy[line+1][col+1], world_copy[line+1][col + 2],
+                    world_copy[line + 2][col], world_copy[line + 2][col+1], world_copy[line + 2][col + 2]]
+            if "_ " not in area:
+                world[line][col] = ". "
     return world
 
 def show_world(world):
@@ -83,3 +102,5 @@ def generate_world(world_size_min, world_size_max, room_amount_min, room_amount_
     world = filter_world(world)
     final_world = show_world(world)
     return final_world
+
+print(generate_world(20, 20, 5, 7, 1, 6, 1, 7))
