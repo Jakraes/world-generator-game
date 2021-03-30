@@ -82,7 +82,7 @@ def movement(current_position, world, tiles):
     elif key == "esc":
         return "True"
     else:
-        movement(current_position, world)
+        movement(current_position, world, tiles)
 
 def game():
     character ={"hp": 10, "attack": random.randint(1,5), "tile": "@"}
