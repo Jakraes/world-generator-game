@@ -116,7 +116,12 @@ def filter_world(world, filter_quality = 5):
                 if world[line][col] != ". " and (line == 0 or col == 0 or line == len(world)-1 or col == len(world[0])-1):
                     world[line][col] = "# " # If there's a tile in the border of the map that is not empty, it gets turned into a wall
 
-                """if world[line][col] == "# " or world[line][col] == "X ":
+        """for line in range(len(world)):
+            for col in range(len(world[0])):
+                area = [world_copy[line][col], world_copy[line][col+1], world_copy[line][col+2],
+                        world_copy[line+1][col], world_copy[line+1][col+2],
+                        world_copy[line+2][col], world_copy[line+2][col+1], world_copy[line+2][col+2]]
+                if world[line][col] == "# " or world[line][col] == "X ":"
                     floor_count = area.count("_ ")
                     if floor_count == 0:
                         world[line][col] = ". """
@@ -151,7 +156,4 @@ def world_generator():
             else:
                 pass
 
-    return show_world(world)
-
-
-print(world_generator())
+    return world, world_blocks

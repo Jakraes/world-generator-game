@@ -5,6 +5,7 @@ from world_generator_v2 import world_generator, show_world
 import time
 import copy
 
+
 def clear():
     system("cls")
 
@@ -57,6 +58,7 @@ def controls():
     else:
         controls()
 
+
 def movement(current_position, world, tiles):
     key = k.read_key()
     if key == "w" and current_position[0] != 0:
@@ -64,7 +66,7 @@ def movement(current_position, world, tiles):
         if current_position in tiles["# "]:
             current_position[0] += 1
         return current_position
-    elif key == "s" and current_position[0] != len(world)-1:
+    elif key == "s" and current_position[0] != len(world) - 1:
         current_position[0] += 1
         if current_position in tiles["# "]:
             current_position[0] -= 1
@@ -74,7 +76,7 @@ def movement(current_position, world, tiles):
         if current_position in tiles["# "]:
             current_position[1] += 1
         return current_position
-    elif key == "d" and current_position[1] != len(world[0])-1:
+    elif key == "d" and current_position[1] != len(world[0]) - 1:
         current_position[1] += 1
         if current_position in tiles["# "]:
             current_position[1] -= 1
@@ -84,8 +86,9 @@ def movement(current_position, world, tiles):
     else:
         movement(current_position, world, tiles)
 
+
 def game():
-    character ={"hp": 10, "attack": random.randint(1,5), "tile": "@"}
+    character = {"hp": 10, "attack": random.randint(1, 5), "tile": "@"}
     generation = world_generator()
     world = generation[0]
     tiles = generation[1]
@@ -101,7 +104,6 @@ def game():
         copy_world = copy.deepcopy(world)
         time.sleep(0.2)
         mov = movement(current_position, copy_world, tiles)
-        print(current_position)
         clear()
         if mov == "True":
             playing = False
