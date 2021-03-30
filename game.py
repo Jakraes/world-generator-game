@@ -59,23 +59,22 @@ def controls():
 
 def movement(current_position, world, tiles):
     key = k.read_key()
-    pressed = False
-    if key == "w" and current_position[1] != 0 and not pressed:
+    if key == "w" and current_position[0] != 0:
         current_position[0] -= 1
         if current_position in tiles["# "]:
             current_position[0] += 1
         return current_position
-    elif key == "s" and current_position[1] != len(world)-1 and not pressed:
+    elif key == "s" and current_position[0] != len(world)-1:
         current_position[0] += 1
         if current_position in tiles["# "]:
             current_position[0] -= 1
         return current_position
-    elif key == "a" and current_position[0] != 0 and not pressed:
+    elif key == "a" and current_position[1] != 0:
         current_position[1] -= 1
         if current_position in tiles["# "]:
             current_position[1] += 1
         return current_position
-    elif key == "d" and current_position[0] != len(world[0])-1 and not pressed:
+    elif key == "d" and current_position[1] != len(world[0])-1:
         current_position[1] += 1
         if current_position in tiles["# "]:
             current_position[1] -= 1
@@ -96,11 +95,13 @@ def game():
     playing = True
     copy_world = copy.deepcopy(world)
     copy_world[current_position[0]][current_position[1]] = "@ "
+    clear()
     print(show_world(copy_world))
     while character["hp"] > 0 and playing:
         copy_world = copy.deepcopy(world)
         time.sleep(0.2)
         mov = movement(current_position, copy_world, tiles)
+        print(current_position)
         clear()
         if mov == "True":
             playing = False
